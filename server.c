@@ -31,6 +31,24 @@ int main(int argc, char *argv[])
 
   //
   // CS537 (Part B): Create & initialize the shared memory region...
+  
+  // FOR CREATING THE SHM
+
+
+  // Create a new shared memory object
+  int shm_fd = shm_open("SHM 1122334455", O_RDWR | O_CREAT, 0660);
+
+  // Truncate sharmed memory object to a single page size
+  ftruncate(shm_fd, getpagesize());
+
+  // Map the shared memory object into the address space
+  void* shm_ptr = mmap(NULL, PAGESIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+
+
+  // FOR DELETING THE SHM
+  munmap(NULL, PAGESIZE);
+  shm_unlink("SHM 1122334455");
+
   //
 
   // 
