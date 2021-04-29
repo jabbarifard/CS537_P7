@@ -184,8 +184,8 @@ void requestHandle(int fd)
     // CS537 (Part B): Account for a static request...
     //
     for(int i = 0; i < 32; i++){
-      if(shm_ptr[i].TID == pthread_self()){
-        shm_ptr[i].static_requests++;
+      if(shm_slot_ptr[i].TID == pthread_self()){
+        shm_slot_ptr[i].static_requests++;
       }
     }
  
@@ -200,8 +200,8 @@ void requestHandle(int fd)
     // CS537 (Part B): Account for a dynamic request...
     //
     for(int i = 0; i < 32; i++){
-      if(shm_ptr[i].TID == pthread_self()){
-        shm_ptr[i].dynamic_requests++;
+      if(shm_slot_ptr[i].TID == pthread_self()){
+        shm_slot_ptr[i].dynamic_requests++;
       }
     }
 
