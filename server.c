@@ -12,18 +12,23 @@
 //
 
 struct thread_arg {
-    pthread_mutex_t mutex;
-    pthread_cond_t not_full;
-    pthread_cond_t not_empty;
+  pthread_mutex_t mutex;
+  pthread_cond_t not_full;
+  pthread_cond_t not_empty;
 };
+struct thread_arg lock;
 
 int buffer_size = 0;
 int num_in_buffer = 0;
 int* buffer;
-struct thread_arg lock;
 
 char 	SHM_NAME[4096];
 void* shm_ptr; 
+slot_t* shm_slot_ptr;
+
+int listenfd, connfd, port, clientlen;
+struct sockaddr_in clientaddr;
+struct thread_arg *a;
 
 // CS537: Parse the new arguments too
 void getargs(int *port, int argc, char *argv[])
@@ -35,13 +40,16 @@ void getargs(int *port, int argc, char *argv[])
   *port = atoi(argv[1]);  
 }
 
-void worker_func(void* args) {
+void *worker_func(void* args) {
   // Put each TID into SHM slot
   for(int i = 0; i < 32; i++){
     if(shm_slot_ptr[i].TID == 0){
       shm_slot_ptr[i].TID = pthread_self();
     }
   }
+
+  clientlen = sizeof(clientaddr);
+  connfd = Accept(listenfd, (SA *)&clientaddr, (socklen_t *) &clientlen);
   requestHandle(connfd);
   
   while (1) {
@@ -72,28 +80,26 @@ void worker_func(void* args) {
 
 void sighandler(int signum) {
   // FOR DELETING THE SHM
-  munmap(SHM_NAME, PAGESIZE);
+  munmap(SHM_NAME, getpagesize());
   shm_unlink(shm_ptr);
   exit(1);
 }
 
 int main(int argc, char *argv[])
 {
-  int listenfd, connfd, port, clientlen;
-  struct sockaddr_in clientaddr;
-  struct thread_arg *a;
 
-  pthread_mutex_init(&lock.mutex, NULL);
-  pthread_mutex_init(&lock.not_full, NULL);
-  pthread_mutex_init(&lock.not_empty, NULL);
+  pthread_mutex_init (&lock.mutex, NULL);
+  pthread_cond_init  (&lock.not_full, NULL);
+  pthread_cond_init  (&lock.not_empty, NULL);
 
   getargs(&port, argc, argv);
   int num_threads = atoi(argv[2]);
   int buffer_size = atoi(argv[3]);
 
   // CS537 (Part B): Create & initialize the shared memory region...
-  
-  SHM_NAME = argv[3];
+  strcpy(SHM_NAME, argv[0]);
+  // SHM_NAME = argv[4];
+
   // Create a new shared memory object
   int shm_fd = shm_open(SHM_NAME, O_RDWR | O_CREAT, 0660);
   if(shm_fd == -1){
@@ -104,7 +110,7 @@ int main(int argc, char *argv[])
   ftruncate(shm_fd, getpagesize());
 
   // Map the shared memory object into the address space
-  shm_ptr = mmap(NULL, PAGESIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+  shm_ptr = mmap(NULL, getpagesize(), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
   // Map the shm_ptr to an the slot array
   // THIS IS A GLOBAL VARIABLE
@@ -124,8 +130,11 @@ int main(int argc, char *argv[])
   pthread_t thread_pool[num_threads];
 
   for (int i = 0; i < num_threads; i++) {
-        pthread_create(&thread_pool[i], NULL, worker_func, NULL);
+    pthread_create(&thread_pool[i], NULL, worker_func, NULL);
   }
+
+  // PART B: CLOSING THE SHM
+  signal(SIGINT, sighandler);
 
   listenfd = Open_listenfd(port);
   while (1) {
@@ -134,15 +143,15 @@ int main(int argc, char *argv[])
     pthread_mutex_lock(&lock.mutex);
 
     while (num_in_buffer == buffer_size) {
-            pthread_cond_wait(&lock.not_full, &lock.mutex);
+      pthread_cond_wait(&lock.not_full, &lock.mutex);
     } 
     for (int i = 0; i < buffer_size; i++) {
-        if (buffer[i] == 0) {
-		      buffer[i] = connfd;
-		      num_in_buffer++;
-		      pthread_cond_signal(&lock.not_empty);
-		      break;
-	}
+      if (buffer[i] == 0) {
+        buffer[i] = connfd;
+        num_in_buffer++;
+        pthread_cond_signal(&lock.not_empty);
+        break;
+      } 
     }
 
     pthread_mutex_unlock(&a->mutex);
@@ -156,7 +165,5 @@ int main(int argc, char *argv[])
     requestHandle(connfd);
     Close(connfd);
     
-    // PART B: CLOSING THE SHM
-    signal(SIGINT, sighandler);
   }
 }

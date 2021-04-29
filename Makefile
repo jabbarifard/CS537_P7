@@ -4,12 +4,12 @@
 #
 SERVER_OBJS = server.o request.o helper.o
 CLIENT_OBJS = client.o helper.o
-STAT_OBJS   = stat.o   helper.o
+STAT_OBJS   = stat_process.o   helper.o
 
 CC = gcc
-CFLAGS = -g -Werror -Wall -Wno-format-overflow -Wno-restrict -lrt
+CFLAGS = -g -Werror -Wall -Wno-format-overflow -Wno-restrict
 
-LIBS = -lpthread 
+LIBS = -lpthread -lrt
 
 .SUFFIXES: .c .o 
 

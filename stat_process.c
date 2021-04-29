@@ -2,6 +2,8 @@
 #include "request.h"
 
 void* shm_ptr; 
+slot_t* shm_slot_ptr;
+
 void sighandler(int signum) {
   // FOR DELETING THE SHM
   shm_unlink(shm_ptr);
@@ -25,7 +27,7 @@ int main(int argc, char *argv[])
   }
 
   ftruncate(shm_fd, getpagesize());
-  shm_ptr = mmap(NULL, PAGESIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+  shm_ptr = mmap(NULL, getpagesize(), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
   slot_t* slot_ptr = (slot_t*) shm_ptr;
 
   // Signal handler -> make sure to close SHM
