@@ -47,6 +47,14 @@ typedef struct {
 } rio_t;
 /* $end rio_t */
 
+// SHM slot
+typedef struct {
+  int TID;
+  int static_requests;
+  int dynamic_requests;
+} slot_t;
+extern slot_t* shm_slot_ptr;
+
 /* External variables */
 extern int h_errno;    /* defined by BIND for DNS errors */ 
 extern char **environ; /* defined by libc */

@@ -12,16 +12,18 @@
 //
 
 struct thread_arg {
-    pthread_mutex_t mutex;
-    pthread_cond_t not_full;
-    pthread_cond_t not_empty;
-    //int is_ready;
-    //int val;
+  pthread_mutex_t mutex;
+  pthread_cond_t not_full;
+  pthread_cond_t not_empty;
+  // int is_ready;
+  // int val;
 };
 
 int buffer_size = 0;
 int num_in_buffer = 0;
 
+char 	SHM_NAME[4096];
+void* shm_ptr; 
 
 /*void *my_thread(void *arg) {
     struct thread_arg *a = (struct thread_arg *)arg;
@@ -52,95 +54,109 @@ void getargs(int *port, int argc, char *argv[])
 }
 
 void worker_func(void* args, int *buffer[], int *connfd) {
+
+  // Put each TID into SHM slot
+  for(int i = 0; i < 32; i++){
+    if(shm_slot_ptr[i].TID == 0){
+      shm_slot_ptr[i].TID = pthread_self();
+    }
+  }
+
   struct thread_arg *a = (struct thread_arg *)arg;
-  //fetch a request from buffer
-  //call requestHandle()
+  // fetch a request from buffer
+  // call requestHandle()
   requestHandle(connfd);
   //
-  //assume we already have the scope for everything we need
+  // assume we already have the scope for everything we need
   while (1) {
-	  //grab the mutex
+	  // grab the mutex
 	  pthread_mutex_lock(&a->mutex);
 	  if (num_in_buffer == 0) {//if empty
 		  pthread_cond_wait(&a->not_empty, &a->mutex);
 	  }
-	  //loop through the buffer to find a slot with a request
+	  // loop through the buffer to find a slot with a request
 	  else {
 	      for (int i = 0; i < buffer_size; i++) {
 		  if (buffer[i] != 0 && connfd = buffer[i]) {
-			//connfd = buffer[i];
+			// connfd = buffer[i];
 	  		//mark the request as done
 	  		buffer[i] = 0;
 			num_in_buffer--;
-			//signal the conditional variable the main thread is waiting on
+			// signal the conditional variable the main thread is waiting on
 			pthread_cond_signal(&arg.not_full);
 			break;
 		  }
 	      }
-	  //release lock
+	  // release lock
 	  pthread_mutex_unlock(&a->mutex);
 	  requestHandle(connfd);
   }
 }
 
+void sighandler(int signum) {
+  // FOR DELETING THE SHM
+  munmap(SHM_NAME, PAGESIZE);
+  shm_unlink(shm_ptr);
+  exit(1);
+}
 
 int main(int argc, char *argv[])
 {
   int listenfd, connfd, port, clientlen;
   struct sockaddr_in clientaddr;
   struct thread_arg *a;
-  //long sleeptime = (long)arg;
+  // long sleeptime = (long)arg;
 
   getargs(&port, argc, argv);
   int num_threads = atoi(argv[2]);
   int buffer_size = atoi(argv[3]);
-  //buffer: how many request
-  //thread pool : our threads
+  // buffer: how many request
+  // thread pool : our threads
 
   //
   // CS537 (Part B): Create & initialize the shared memory region...
   
-  // FOR CREATING THE SHM
-
-
+  SHM_NAME = argv[3];
   // Create a new shared memory object
-  int shm_fd = shm_open("SHM 1122334455", O_RDWR | O_CREAT, 0660);
+  int shm_fd = shm_open(SHM_NAME, O_RDWR | O_CREAT, 0660);
+  if(shm_fd == -1){
+    return 1;
+  }
 
   // Truncate sharmed memory object to a single page size
   ftruncate(shm_fd, getpagesize());
 
   // Map the shared memory object into the address space
-  void* shm_ptr = mmap(NULL, PAGESIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+  shm_ptr = mmap(NULL, PAGESIZE, PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
+  // Map the shm_ptr to an the slot array
+  // THIS IS A GLOBAL VARIABLE
+  shm_slot_ptr = (slot_t*) shm_ptr;
 
-  // FOR DELETING THE SHM
-  munmap(NULL, PAGESIZE);
-  shm_unlink("SHM 1122334455");
-
-  //
 
   // 
   // CS537 (Part A): Create some threads...
   //
-  //server will allocate the buffer and creates a bunch of worker threads, worker thread will run some worker function
+  // server will allocate the buffer and creates a bunch of worker threads
+  // worker thread will run some worker function
   //
   
-  //int buffer[buffer_size];
+  // int buffer[buffer_size];
 
-  //we need 1 mutex lock (for the buffer) and 2 conditional variables(main thread vs worker threads)
-  //  if the buffer is full, then main thread cannot write a new request to the buffer
-  //  if the buffer is empty, then working threads cannot read any request from the buffer
-  //we need the scope of buffer, the mutex lock and conditional variables
-  //we can either pass them in as parameters, or make them global
+  // we need 1 mutex lock (for the buffer) and 2 conditional variables(main thread vs worker threads)
+  //   if the buffer is full, then main thread cannot write a new request to the buffer
+  //   if the buffer is empty, then working threads cannot read any request from the buffer
+  // we need the scope of buffer, the mutex lock and conditional variables
+  // we can either pass them in as parameters, or make them global
   
   int buffer[buffer_size];
 
   pthread_t thread_pool[num_threads];
   for (int i = 0; i < num_threads; i++) {
-        pthread_create(&thread_pool[i], NULL, void *(*worker_func)(void* args, buffer, connfd), &arg); //*arguments foi worker_func, type void* 
-	
+    // *arguments foi worker_func, type void* 
+    pthread_create(&thread_pool[i], NULL, void *(*worker_func)(void* args, buffer, connfd), &arg); 
   }
-  //worker_func is a function pointer, like syscall.c in xv6
+  // worker_func is a function pointer, like syscall.c in xv6
 
   listenfd = Open_listenfd(port);
   while (1) {
@@ -149,16 +165,16 @@ int main(int argc, char *argv[])
     pthread_mutex_lock(&a->mutex);
 
     if (num_in_buffer == buffer_size) {
-            pthread_cond_wait(&a->not_full, &a->mutex);
+      pthread_cond_wait(&a->not_full, &a->mutex);
     } 
     else {
-    	    for (int i = 0; i < buffer_size; i++) {
-	        if (buffer[i] == 0) {
-		      buffer[i] = connfd;
-		      num_in_buffer++;
-		      pthread_cond_signal(&arg.not_empty);
-		      break;
-	        }
+      for (int i = 0; i < buffer_size; i++) {
+        if (buffer[i] == 0) {
+        buffer[i] = connfd;
+        num_in_buffer++;
+        pthread_cond_signal(&arg.not_empty);
+        break;
+        }
 	    }
     }
 
@@ -176,5 +192,8 @@ int main(int argc, char *argv[])
     //
     requestHandle(connfd);
     Close(connfd);
+    
+    // PART B: CLOSING THE SHM
+    signal(SIGINT, sighandler);
   }
 }

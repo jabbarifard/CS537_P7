@@ -183,6 +183,11 @@ void requestHandle(int fd)
     //
     // CS537 (Part B): Account for a static request...
     //
+    for(int i = 0; i < 32; i++){
+      if(shm_ptr[i].TID == pthread_self()){
+        shm_ptr[i].static_requests++;
+      }
+    }
  
   } else {
     if (!(S_ISREG(sbuf.st_mode)) || !(S_IXUSR & sbuf.st_mode)) {
@@ -194,6 +199,11 @@ void requestHandle(int fd)
     //
     // CS537 (Part B): Account for a dynamic request...
     //
+    for(int i = 0; i < 32; i++){
+      if(shm_ptr[i].TID == pthread_self()){
+        shm_ptr[i].dynamic_requests++;
+      }
+    }
 
   }
 }

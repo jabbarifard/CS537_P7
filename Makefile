@@ -4,21 +4,25 @@
 #
 SERVER_OBJS = server.o request.o helper.o
 CLIENT_OBJS = client.o helper.o
+STAT_OBJS   = stat.o   helper.o
 
 CC = gcc
-CFLAGS = -g -Werror -Wall -Wno-format-overflow -Wno-restrict
+CFLAGS = -g -Werror -Wall -Wno-format-overflow -Wno-restrict -lrt
 
 LIBS = -lpthread 
 
 .SUFFIXES: .c .o 
 
-all: server client output.cgi
+all: server client stat_process output.cgi
 
 server: $(SERVER_OBJS)
 	$(CC) $(CFLAGS) -o server $(SERVER_OBJS) $(LIBS)
 
 client: $(CLIENT_OBJS)
 	$(CC) $(CFLAGS) -o client $(CLIENT_OBJS) $(LIBS)
+
+stat_process : $(STAT_OBJS)
+	$(CC) $(CFLAGS) -o stat_process $(CLIENT_OBJS) $(LIBS)
 
 output.cgi: output.c
 	$(CC) $(CFLAGS) -o output.cgi output.c
