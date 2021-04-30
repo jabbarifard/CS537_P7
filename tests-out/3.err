@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 95, in wait_response
+    response = conn.getresponse()
+  File "/usr/lib/python3.8/http/client.py", line 1347, in getresponse
+    response.begin()
+  File "/usr/lib/python3.8/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.8/http/client.py", line 268, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.8/socket.py", line 669, in readinto
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "tests/3.py", line 17, in <module>
+    tester.wait_response(conns[i])
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 98, in wait_response
+    raise TestFailure("Unable to get response from the server")
+tester.TestFailure: Unable to get response from the server

@@ -33,24 +33,32 @@ struct thread_arg *a;
 // CS537: Parse the new arguments too
 void getargs(int *port, int argc, char *argv[])
 {
-  if (argc != 2) {
+  /*if (argc != 2) {
     fprintf(stderr, "Usage: %s <port>\n", argv[0]);
     exit(1);
-  }
-  *port = atoi(argv[1]);  
+  }*/
+  *port = atoi(argv[1]);
+  /*if (port < 0) {
+          fprintf(stderr, "Usage: %s <port>\n", argv[0]);
+          exit(1);
+  }*/
+  
 }
 
 void *worker_func(void* args) {
   // Put each TID into SHM slot
+  pthread_mutex_lock(&lock.mutex);
   for(int i = 0; i < 32; i++){
     if(shm_slot_ptr[i].TID == 0){
       shm_slot_ptr[i].TID = pthread_self();
+      break;
     }
   }
-
-  clientlen = sizeof(clientaddr);
-  connfd = Accept(listenfd, (SA *)&clientaddr, (socklen_t *) &clientlen);
-  requestHandle(connfd);
+  pthread_mutex_unlock(&lock.mutex);
+  //main is doing Accept to the buffer, and worker will call request buffer on that
+  // clientlen = sizeof(clientaddr);
+  // connfd = Accept(listenfd, (SA *)&clientaddr, (socklen_t *) &clientlen);
+  // requestHandle(connfd);
   
   while (1) {
 	  //grab the mutex
@@ -94,10 +102,18 @@ int main(int argc, char *argv[])
 
   getargs(&port, argc, argv);
   int num_threads = atoi(argv[2]);
+  if (num_threads < 0) {
+	  fprintf(stderr, "Usage: %s <port>\n", argv[0]);
+    	  exit(1);
+  }
   int buffer_size = atoi(argv[3]);
+  if (buffer_size < 0) {
+	  fprintf(stderr, "Usage: %s <port>\n", argv[0]);
+          exit(1);
+  }
 
   // CS537 (Part B): Create & initialize the shared memory region...
-  strcpy(SHM_NAME, argv[0]);
+  strcpy(SHM_NAME, argv[4]);//0 to 4
   // SHM_NAME = argv[4];
 
   // Create a new shared memory object
@@ -154,7 +170,7 @@ int main(int argc, char *argv[])
       } 
     }
 
-    pthread_mutex_unlock(&a->mutex);
+    pthread_mutex_unlock(&lock.mutex);
 
     // CS537 (Part A): In general, don't handle the request in the main thread.
     // Save the relevant info in a buffer and have one of the worker threads 
@@ -162,8 +178,8 @@ int main(int argc, char *argv[])
     // 
     //
     //
-    requestHandle(connfd);
-    Close(connfd);
+    //requestHandle(connfd);
+    //Close(connfd);
     
   }
 }

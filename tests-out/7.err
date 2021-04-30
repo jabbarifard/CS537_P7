@@ -1,0 +1,700 @@
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 95, in wait_response
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+Exception in thread Thread-7:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+Exception in thread Thread-5:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 95, in wait_response
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+Exception in thread Thread-8:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    response = conn.getresponse()
+  File "/usr/lib/python3.8/http/client.py", line 1347, in getresponse
+    response = conn.getresponse()
+  File "/usr/lib/python3.8/http/client.py", line 1347, in getresponse
+    response.begin()
+  File "/usr/lib/python3.8/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.8/http/client.py", line 268, in _read_status
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+Exception in thread Thread-4:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.8/socket.py", line 669, in readinto
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+Exception in thread Thread-6:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+Exception in thread Thread-9:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    response.begin()
+  File "/usr/lib/python3.8/http/client.py", line 307, in begin
+    sock.connect(sa)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+Exception in thread Thread-11:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+Exception in thread Thread-10:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+Exception in thread Thread-12:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 95, in wait_response
+    response = conn.getresponse()
+  File "/usr/lib/python3.8/http/client.py", line 1347, in getresponse
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+Exception in thread Thread-14:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.8/http/client.py", line 268, in _read_status
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    response.begin()
+  File "/usr/lib/python3.8/http/client.py", line 307, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.8/http/client.py", line 276, in _read_status
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 103, in send_request_then_wait_response
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+Exception in thread Thread-15:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    return self.wait_response(conn=conn)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 98, in wait_response
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    raise TestFailure("Unable to get response from the server")
+tester.TestFailure: Unable to get response from the server
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+Exception in thread Thread-13:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+Exception in thread Thread-16:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 103, in send_request_then_wait_response
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.8/socket.py", line 669, in readinto
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    return self._sock.recv_into(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+Exception in thread Thread-17:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 103, in send_request_then_wait_response
+    return self.wait_response(conn=conn)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 98, in wait_response
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+Exception in thread Thread-18:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    return self.wait_response(conn=conn)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 98, in wait_response
+    raise TestFailure("Unable to get response from the server")
+tester.TestFailure: Unable to get response from the server
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    raise TestFailure("Unable to get response from the server")
+tester.TestFailure: Unable to get response from the server
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+Exception in thread Thread-19:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+Exception in thread Thread-20:
+Traceback (most recent call last):
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 88, in send_request
+    conn.request('GET', item)
+  File "/usr/lib/python3.8/http/client.py", line 1255, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1301, in _send_request
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1250, in endheaders
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    self.sock = self._create_connection(
+  File "/usr/lib/python3.8/socket.py", line 808, in create_connection
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    self.send(msg)
+  File "/usr/lib/python3.8/http/client.py", line 950, in send
+    self.connect()
+  File "/usr/lib/python3.8/http/client.py", line 921, in connect
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.8/http/client.py", line 1010, in _send_output
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    raise err
+  File "/usr/lib/python3.8/socket.py", line 796, in create_connection
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.8/threading.py", line 870, in run
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    self._target(*self._args, **self._kwargs)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 108, in run_client_workload
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+    self.send_request_then_wait_response(item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 102, in send_request_then_wait_response
+    conn = self.send_request(item=item)
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 90, in send_request
+    raise TestFailure("Unable to send request to the server")
+tester.TestFailure: Unable to send request to the server
+Traceback (most recent call last):
+  File "tests/7.py", line 20, in <module>
+    tester.kill_server()
+  File "/afs/cs.wisc.edu/u/e/l/elaheh/private/cs537/CS537_p7/tests/tester.py", line 68, in kill_server
+    raise TestFailure(
+tester.TestFailure: Server exits unexpectedly with return code 0

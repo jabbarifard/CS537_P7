@@ -1,0 +1,2 @@
+Pass: shared memory successfully created in /dev/shm
+Fail: shared memory not unlinked
