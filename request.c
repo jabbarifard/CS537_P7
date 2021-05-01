@@ -145,6 +145,7 @@ void requestServeStatic(int fd, char *filename, int filesize)
 
 }
 
+slot_t* shm_slot_ptr;
 // handle a request
 void requestHandle(int fd)
 {
@@ -183,9 +184,13 @@ void requestHandle(int fd)
     //
     // CS537 (Part B): Account for a static request...
     //
+    // shm_slot_ptr[0].static_requests++;
+
     for(int i = 0; i < 32; i++){
-      if(shm_slot_ptr[i].TID == pthread_self()){
+      if(shm_slot_ptr[i].TID == (int)(pthread_self())){
+        printf("Account for a static request... \n");
         shm_slot_ptr[i].static_requests++;
+        break;
       }
     }
  
@@ -199,9 +204,13 @@ void requestHandle(int fd)
     //
     // CS537 (Part B): Account for a dynamic request...
     //
+    // shm_slot_ptr[0].dynamic_requests++;
+
     for(int i = 0; i < 32; i++){
-      if(shm_slot_ptr[i].TID == pthread_self()){
+      if(shm_slot_ptr[i].TID == (int)(pthread_self())){
+        printf("Account for a dynamic request... \n");
         shm_slot_ptr[i].dynamic_requests++;
+        break;
       }
     }
 

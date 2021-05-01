@@ -1,1 +1,0 @@
-Fail: Server does not unlink shared memory on SIGINT

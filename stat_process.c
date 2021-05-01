@@ -12,7 +12,7 @@ void sighandler(int signum) {
 
 int main(int argc, char *argv[])
 {
-  if (argc != 3) {
+  if (argc != 4) {
     fprintf(stderr, "stat_process [shm_name] [sleeptime_ms] [num_threads]\n");
     exit(1);
   }
@@ -20,6 +20,14 @@ int main(int argc, char *argv[])
   char * shm_name  = argv[1];
   int sleeptime_ms = atoi(argv[2]);  
   int num_threads  = atoi(argv[3]);  
+
+  if ( sleeptime_ms <= 0 ) {
+    exit(1);
+  }
+
+  if ( num_threads < 1 ) {
+    exit(1);
+  }
 
   int shm_fd = shm_open(shm_name, O_RDWR, 0660);
   if(shm_fd == -1){
@@ -38,11 +46,15 @@ int main(int argc, char *argv[])
   // <TID t1> : <Requests t1> <Static t1> <Dynamic t1>
   // <TID t2> : <Requests t2> <Static t2> <Dynamic t2>
 
-  int count = 0;
+  int count = 1;
   while(1){
 
     // Sleep
-    sleep(sleeptime_ms / 1000);
+    struct timespec t, t2;
+    t.tv_sec  = 0;
+    t.tv_nsec = 1000000L * sleeptime_ms;
+   
+    nanosleep(&t , &t2);
 
     // Print SHM statistic
     printf("\n%d", count);
@@ -51,7 +63,7 @@ int main(int argc, char *argv[])
       int staticReq  = slot_ptr[i].static_requests;
       int dynamicReq = slot_ptr[i].dynamic_requests;
       int req        = staticReq + dynamicReq;
-      printf("%d : %d %d %d\n", TID, staticReq, dynamicReq, req);
+      printf("%d : %d %d %d\n", TID, req, staticReq, dynamicReq);
     }
 
   }
